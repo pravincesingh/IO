@@ -42,12 +42,16 @@ def index():
             db.child("Lights").update({"light2":"off"})
             print("Light off")
         else:
-                # pass # unknown
-            return render_template("smart.html")
+            # L1="Light 1 is "+db.child("Lights").child("light1").get().val()
+            # L2="Light 2 is "+db.child("Lights").child("light2").get().val()
+            return render_template("smart.html",L1=L1,L2=L2)
     elif request.method == 'GET':
             # return render_template("index.html")
         print("No Post Back Call")
-    return render_template("smart.html")
+    
+    L1="Light 1 is "+db.child("Lights").child("light1").get().val()
+    L2="Light 2 is "+db.child("Lights").child("light2").get().val()
+    return render_template("smart.html",L1=L1,L2=L2)
 
 
 @app.route("/advance.html", methods=['GET', 'POST'])
@@ -64,11 +68,13 @@ def advance():
             print("Light off")
         else:
                 # pass # unknown
-            return render_template("advance.html")
+            AM ="Advance mode is "+ db.child("AdvanceMode").child("mode").get().val()
+            return render_template("advance.html",AM=AM)
     elif request.method == 'GET':
             # return render_template("index.html")
         print("No Post Back Call")
-    return render_template("advance.html")
+    AM ="Advance mode is "+ db.child("AdvanceMode").child("mode").get().val()
+    return render_template("advance.html",AM=AM)
 
 
 if __name__ == '__main__':
